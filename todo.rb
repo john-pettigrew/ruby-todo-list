@@ -21,11 +21,14 @@ class Todo_List
 			end
 		end
 	end
-	def complete(item)
+	def complete(item, remove)
 		puts "	(Completed "+item+")"
-		for i in (0 ... @list.length)
-			if item == (@list.at(i)).get_title
-				@list.at(i).complete
+		for i in (0 ... @list.length-1)
+			if item == @list[i].get_title
+				@list[i].complete
+				if remove
+					@list.delete_at(i)
+				end
 			end
 		end
 	end
@@ -65,5 +68,5 @@ list.print_list
 
 #testing completion
 puts "\nCompletion Test"
-list.complete("Program")
+list.complete("Program", true)
 list.print_list

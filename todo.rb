@@ -23,13 +23,15 @@ class Todo_List
 	end
 	def complete(item, remove)
 		puts "	(Completed "+item+")"
-		for i in (0 ... @list.length-1)
+		for i in (0 ... @list.length)
 			if item == @list[i].get_title
-				@list[i].complete
-				if remove
-					@list.delete_at(i)
-				end
+				@list[i].complete_item
+				chosen_item = i
+				found = true
 			end
+		end
+		if remove && found
+			@list.delete_at(chosen_item)
 		end
 	end
 end
@@ -41,7 +43,7 @@ class Todo_List_Item
 		@completed = completed
 		@due = due
 	end
-	def complete()
+	def complete_item()
 		@completed = true
 	end
 	def get_title
